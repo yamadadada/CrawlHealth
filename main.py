@@ -3,6 +3,8 @@ import pymysql
 import time
 from lxml import etree
 
+headers = {'User-Agent': 'User-Agent:Mozilla/5.0'}
+
 url = "http://tzcs.gdut.edu.cn/spQuery"
 url_params = {'method': 'healthscore', 'schoolid': '100001'}
 
@@ -10,7 +12,7 @@ url_params = {'method': 'healthscore', 'schoolid': '100001'}
 def crawl(sno, db):
     params = url_params
     params['stuNo'] = sno
-    r = requests.get(url, params)
+    r = requests.get(url, params, headers=headers)
     response = etree.HTML(r.text)
     data_dict = dict()
     data_dict['height'] = float(response.xpath('/html/body/table/tbody/tr[1]/td[2]/text()')[0])
