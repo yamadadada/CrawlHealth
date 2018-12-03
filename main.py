@@ -50,7 +50,9 @@ sno_list = []
 for row in results:
     sno_list.append(row[0])
 for sno in sno_list:
+    if int(sno) <= 3216004037:
+        continue
     print("正在遍历：" + sno + "...")
     crawl(sno, db)
-    time.sleep(3)
+    time.sleep(2)
 db.close()
